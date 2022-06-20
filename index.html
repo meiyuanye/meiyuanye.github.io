@@ -144,6 +144,104 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-vangrant安装与配置centos7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/20/vangrant%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEcentos7/">vangrant安装与配置centos7</a>
+    </h1>
+  
+
+        
+        <a href="/2022/06/20/vangrant%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEcentos7/" class="archive-article-date">
+  	<time datetime="2022-06-20T11:52:01.751Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、下载VirtualBox"><a href="#一、下载VirtualBox" class="headerlink" title="一、下载VirtualBox"></a>一、下载VirtualBox</h2><p>常用的虚拟机有VMware和Virtualbox，前者功能很强大，但需要收费，且过于庞大(个人倾向于较为轻巧的工具)，后者是开源免费的工具。因此我选择用后者，如果用virtualbox自己手动云攒一个centos，对于新手来说还是有些难度的，对于老手来说，虽然不难，但耗时繁琐。</p>
+<p>如果有一个工具可以帮助我们方便地管理虚拟机，一键下载我们想要的操作系统，并可以将这些系统进行打包分享，就可以大大减轻我们的工作量。而这些，vagrant都能做到。</p>
+<p>vagrant也是一款开源免费的工具，用于管理虚拟机。详细的介绍到<a href="https://link.zhihu.com/?target=https://www.vagrantup.com/docs/index.html">官方文档</a>查看。</p>
+<p>vagrant默认是与virtubox组合使用，在使用之前，要先将两者都安装好：</p>
+<p>官网：<a target="_blank" rel="noopener" href="https://www.virtualbox.org/">https://www.virtualbox.org/</a></p>
+<p><img src="https://raw.githubusercontent.com/meiyuanye/picgo_file/master/image-20220620202208024.png" alt="image-20220620202208024"></p>
+<p><img src="https://raw.githubusercontent.com/meiyuanye/picgo_file/master/image-20220620202249462.png" alt="image-20220620202249462"></p>
+<p>下载链接：<a href="https://link.zhihu.com/?target=https://www.virtualbox.org/wiki/Downloads">virtualBox下载地址</a></p>
+<h2 id="二、下载vagrant"><a href="#二、下载vagrant" class="headerlink" title="二、下载vagrant"></a>二、下载vagrant</h2><p>官网：<a target="_blank" rel="noopener" href="https://www.vagrantup.com/downloads">https://www.vagrantup.com/downloads</a></p>
+<p><img src="https://raw.githubusercontent.com/meiyuanye/picgo_file/master/image-20220620202502208.png" alt="image-20220620202502208"></p>
+<p>下载链接：<a href="https://link.zhihu.com/?target=https://www.vagrantup.com/downloads.html">vagrant下载地址</a></p>
+<p>如下载速度过慢，可以复制下载链接到迅雷进行下载。</p>
+<h2 id="三、基本使用"><a href="#三、基本使用" class="headerlink" title="三、基本使用"></a>三、基本使用</h2><p>第一：在本地新建目录，作为vagrant的根目录</p>
+<p>如：<code>E:\vagrant\centos7.2</code></p>
+<p>第二：导入刚刚下载的镜像(box文件)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\vagrant\centos7.2&gt;vagrant box add centos7.2 E:/vagrant/box/centos7.2.box</span><br></pre></td></tr></table></figure>
+
+<p>第三：初始化box</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\vagrant\centos7.2&gt;vagrant init</span><br></pre></td></tr></table></figure>
+
+<p>此时，在<code>E:\vagrant\centos7.2&gt;</code>会自动生成<code>Vagrantfile</code>文件，修改文件中的box名称</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.vm.box = <span class="string">&quot;centos7.2&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>第四：启动box</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\vagrant\centos7.2&gt;vagrant up</span><br></pre></td></tr></table></figure>
+
+<p>启动成功后，打开virtualBox，你会看到vagrant已经为我们搭建好了一个正在运行的centos7.2系统了：</p>
+<p><img src="https://raw.githubusercontent.com/meiyuanye/picgo_file/master/image-20220620203055466.png" alt="image-20220620203055466"></p>
+<p>第五：进入vagrant</p>
+<p>可以在cmd命令下直接进入centos7.2，但我想没人能忍受在丑陋的cmd界面下使用linux</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\vagrant\centos7.2&gt;vagrant ssh</span><br></pre></td></tr></table></figure>
+
+<p>进入虚拟机后，你会发现，vagrant已经将虚拟机的网络配置好了：</p>
+<p><img src="https://raw.githubusercontent.com/meiyuanye/picgo_file/master/image-20220620203209691.png" alt="image-20220620203209691"></p>
+<p>而且默认情况下，vagrant将<code>/vagrant</code>目录映射到物理主机的vagrant根目录。</p>
+<p>如果物理主机设置的根目录是<code>E:\vagrant\centos7.2</code>, 那么虚拟机的<code>/vagrant</code>映射的就是该目录的内容。不管是在物理主机，还是在虚拟机，只要修改了这个目录的内容，都会实时同步。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/20/vangrant%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEcentos7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-阿里云连接jedis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
